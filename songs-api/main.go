@@ -3,8 +3,8 @@ package songs_api
 import (
 	"encoding/json"
 	"fmt"
-	//"log"
-	//"net/http"
+	"log"
+	"net/http"
 	"github.com/gorilla/mux"
 )
 type Song struct {
