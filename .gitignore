@@ -1,2 +1,7 @@
 .idea/*
+<<<<<<< HEAD
 restServices/.idea/
+=======
+*.xml
+*.iml
+>>>>>>> 2d6c831414564cb384cd9e5096e2d44320120df2
