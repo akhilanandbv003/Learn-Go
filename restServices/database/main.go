@@ -92,9 +92,25 @@ var bookId int
 }
 
 func updateBook(w http.ResponseWriter, r *http.Request) {
+	var book Book
+	json.NewDecoder(r.Body).Decode(&book)
+
+result ,err := db.Exec("UPDATE books set title = $1 , author = $2 , year=$3 where id = $4 returning id" ,
+	&book.Title,&book.Author , &book.Year, &book.ID)
+rowsUpdated , err := result.RowsAffected()
+logFatal(err)
+	json.NewEncoder(w).Encode(rowsUpdated)
 
 }
 
 func deleteBook(w http.ResponseWriter, r *http.Request) {
+	parse := mux.Vars(r)
+	id := parse["id"]
+
+	result ,err := db.Exec("delete from books where id = $1 returning id" ,id)
+	rowsUpdated , err := result.RowsAffected()
+	logFatal(err)
+	json.NewEncoder(w).Encode(rowsUpdated)
+
 
 }
